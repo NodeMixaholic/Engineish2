@@ -131,7 +131,57 @@ class NodeInstance {
             let light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
             light.intensity = 0.7;
             return light;
-        }
+        } else if (this.type == "skybox") {
+            let skybox = BABYLON.Mesh.CreateBox("skyBox", 1000.0, scene);
+            let skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+            skyboxMaterial.backFaceCulling = false;
+            skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(this.value, scene);
+            skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+            skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+            skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+            skybox.material = skyboxMaterial;
+            return skybox;
+        } else if (this.type == "particle") {
+            let particleSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
+            particleSystem.particleTexture = new BABYLON.Texture(this.value, scene);
+            particleSystem.minAngularSpeed = -0.5;
+            particleSystem.maxAngularSpeed = 0.5;
+            particleSystem.minSize = 0.1;
+            particleSystem.maxSize = 0.5;
+            particleSystem.minLifeTime = 0.5;
+            particleSystem.maxLifeTime = 1.5;
+            particleSystem.minEmitPower = 0.5;
+            particleSystem.maxEmitPower = 1.0;
+            particleSystem.emitter = new BABYLON.Vector3(0, 0, 0);
+            particleSystem.emitRate = 100;
+            particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+            particleSystem.gravity = new BABYLON.Vector3(0, -9.81, 0);
+            particleSystem.direction1 = new BABYLON.Vector3(-7, 8, 3);
+            particleSystem.direction2 = new BABYLON.Vector3(7, 8, -3);
+            particleSystem.minEmitBox = new BABYLON.Vector3(-1, 0, -1);
+            particleSystem.maxEmitBox = new BABYLON.Vector3(1, 0, 1);
+            particleSystem.color1 = new BABYLON.Color4(1, 0, 0, 1);
+            particleSystem.color2 = new BABYLON.Color4(0, 1, 0, 1);
+            particleSystem.colorDead = new BABYLON.Color4(0, 0, 0, 0.5);
+            particleSystem.start();
+            return particleSystem;
+        } else if (this.type == "baseplate") {
+            //create ground plane
+            let ground = BABYLON.Mesh.CreateGround("ground", width, height, depth, scene);
+            let groundMaterial = new BABYLON.StandardMaterial("groundMat", scene);
+            groundMaterial.diffuseTexture = new BABYLON.Texture(this.value, scene);
+            groundMaterial.diffuseTexture.uScale = 6;
+            groundMaterial.diffuseTexture.vScale = 6;
+            groundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+            groundMaterial.emissiveColor = new BABYLON.Color3(1, 1, 1);
+            groundMaterial.backFaceCulling = false;
+            groundMaterial.wireframe = false;
+            ground.material = groundMaterial;
+            ground.checkCollisions = true;
+            ground.isVisible = true;
+            ground.freezeWorldMatrix();
+            return ground;
+        } 
 
     }
 
