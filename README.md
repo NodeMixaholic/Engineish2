@@ -6,14 +6,23 @@ IntValues, StringValues, and BoolValues will be stored as variables with the sam
 
 ## Valid scripting examples..
 `Instance.new("Script") --will automatically create a function in the script interpriting function with a numbered id ranging from OBSCRIPT1 on up.`
+
 `Instance.new("ForceField") --creates new forcefield around the player`
+
 `Instance.new("Part") --creates new Part at Vector3.new(0,0,0)`
+
 `Instance.new("Part").Position = Vector3.new(1,2,3) --creates new Part at Vector3.new(1,2,3)`
+
 `baseplate = Instance.new("Part") --creates a reference 'baseplate' to a new part.`
+
 `game.Players.LocalPlayer.Humanoid.Health = 0 --Kills the player`
+
 `game.Players.LocalPlayer.Humanoid.Health = math.huge --Gods the player`
+
 `game.Players.LocalPlayer.Humanoid.JumpPower = 50 --Default JumpPower`
+
 `game.Players.LocalPlayer.Humanoid.WalkSpeed = 16 --Default WalkSpeed`
+
 
 # FAQ
 ## Help! My scripts don't work!
