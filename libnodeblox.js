@@ -60,7 +60,10 @@ class NodeInstance {
             let c = new NodeInstance(this.name, "character", scene, 1, 1, 1, 0, 0, 0);
             return [player, charObject, c];
         } else if (this.type == "block") {
-            BABYLON.MeshBuilder.CreateBox(this.name || "box", {width: this.width, height: this.height, depth: this.depth}, parent).position = new BABYLON.Vector3(x, y, z);
+            let block = BABYLON.MeshBuilder.CreateBox(this.name || "box", {width: this.width, height: this.height, depth: this.depth}, parent).position = new BABYLON.Vector3(x, y, z);
+            block.checkCollisions = true;
+            block.freezeWorldMatrix();
+            return block;
         } else if (this.type == "character") {
             //basic third person character
             //create cube character
@@ -109,16 +112,20 @@ class NodeInstance {
                 }
             });
         } else if (this.type == "sound") {
-            let sound = new BABYLON.Sound("sound", this.value, scene, null, { loop: false, autoplay: true });
+            let sound = new Audio(this.value);
+            sound.play();
             return sound;
         } else if (this.type == "loopedSound") {
-            let sound = new BABYLON.Sound("sound", this.value, scene, null, { loop: true, autoplay: true });
+            let sound = new Audio(this.value);
+            sound.loop = true;
+            sound.play();
             return sound;
         } else if (this.type == "soundManual") {
-            let sound = new BABYLON.Sound("sound", this.value, scene, null, { loop: false, autoplay: false });
+            let sound = new Audio(this.value);
             return sound;
         } else if (this.type == "loopedSoundManual") {
-            let sound = new BABYLON.Sound("sound", this.value, scene, null, { loop: true, autoplay: false });
+            let sound = new Audio(this.value);
+            sound.loop = true;
             return sound;
         } else if (this.type == "light") {
             let light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
