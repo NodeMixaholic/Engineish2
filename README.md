@@ -1,7 +1,7 @@
 # OpenBloxEngine
 Easily create singleplayer web experiences by modifying your ROBLOX place slightly, saving your place to a local ROBLOX XML file, and replacing the REPLACEME.
 Each script will be a function with the same name, interpreted as JS code. Additional functions will be enclosed within functions with name pattern `${SCRIPTNAME}${FUNCNAME}`.
-IntValues, StringValues, and BoolValues will be stored as variables with the same names in the script interpreting function. Objects interpreted as bricks or spheres will be placed in the Workspace dictonary, for instance: `partWorks[ace = {"spheres":["part1","infoSphere"."metaSphere","hackerSphere","part3"],"bricks":["part2","Baseplate"]}`
+IntValues, StringValues, and BoolValues will be stored as variables with the same names in the script interpreting function. Objects interpreted as bricks or spheres will be placed in the Workspace dictonary, for instance: `partWorkspace = {"spheres":["part1","infoSphere"."metaSphere","hackerSphere","part3"],"bricks":["part2","Baseplate"]}`
 
 
 ## Valid scripting examples..
