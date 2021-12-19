@@ -198,6 +198,11 @@ function RJuascriptEval(code) {
             x = x || 0;
             y = y || 0;
             z = z || 0;
+            type = type.toLowerCase();
+            if (type == "part") {
+                // Language: javascript
+                type = "block"
+            }
             return new NodeInstance(name, type, parent, width, height, depth, x, y, z);
         }
     }
