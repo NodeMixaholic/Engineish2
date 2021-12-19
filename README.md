@@ -18,3 +18,7 @@ IntValues, StringValues, and BoolValues will be stored as variables with the sam
 # FAQ
 ## Help! My scripts don't work!
 *Be sure you are treating all scripts as old ROBLOX code with the new functions, except for RemoteEvent functions.* This means, for example, you dont FireServer for money, you just set the intvalue directly. If it still doesnt work, I havent implemented the function yet.
+
+## Why arent my Decals available when ROBLOX/my internet is down!?!
+
+Due to certain ROBLOX EULA restrictions, we cannot download assets from their site.
