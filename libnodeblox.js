@@ -202,5 +202,14 @@ function RJuascriptEval(code) {
         }
     }
 
-    return `${code}`;
+    let codeLines = code.split("\n");
+    codeLines.forEach(function (line) {
+        try {
+            return `${code}`;
+        } catch (e) {
+            console.error(`Error in line ${line} (does not exist in our Jua layer?):
+            ${e}`);
+        }
+    });
+
 }
