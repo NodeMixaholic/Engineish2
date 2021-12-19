@@ -29,5 +29,10 @@ IntValues, StringValues, and BoolValues will be stored as variables with the sam
 *Be sure you are treating all scripts as old ROBLOX code with the new functions, except for RemoteEvent functions.* This means, for example, you dont FireServer for money, you just set the intvalue directly. If it still doesnt work, I havent implemented the function yet.
 
 ## Why arent my Decals available when ROBLOX/my internet is down!?!
-
 Due to certain ROBLOX EULA restrictions, we cannot download assets from their site.
+
+## Is this any way referenced from the ROBLOX source code?
+No! In fact, I've made this completely from years of knowledge of ROBLOX place and web backend development. This is probably my greatest work yet.
+
+## So give me a few words that describes this simply, none of that developer jargon.
+Basically, it takes modified ROBLOX XML files, and via this open source compatibility layer, you can just modify your scripts and slightly your place and have a fully functioning ROBLOX game in your browser.
