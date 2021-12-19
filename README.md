@@ -24,6 +24,8 @@ Open source ROBLOX-like, javascript first engine. Making it easier for devs to t
 
 `player.Teleport(128,15,300) //teleports the player`
 
+`newInstance("LeaderboardStat").value(128)`
+
 
 # FAQ
 
