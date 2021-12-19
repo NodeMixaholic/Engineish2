@@ -207,7 +207,7 @@ function RJuascriptEval(code) {
         try {
             return `${code}`;
         } catch (e) {
-            console.error(`Error in line ${line} (does not exist in our Jua layer?):
+            console.error(`WARNING: Error in line ${line} (does not exist in our Jua layer?):
             ${e}`);
         }
     });
