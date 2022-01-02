@@ -1,4 +1,4 @@
-# NodeBlox
+# Engineish2
 Open source ROBLOX-like, javascript first engine. Making it easier for devs to transition their games outside ROBLOX.
 
 # FAQ
