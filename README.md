@@ -1,5 +1,5 @@
-# Engineish2
-Open source ROBLOX-like, javascript first engine. Making it easier for devs to transition their games outside ROBLOX.
+# Engineish2 *(WIP)*
+Open source ROBLOX-like, javascript first engine. Making it easier for devs to transition their games outside ROBLOX, as well as newbies to game development to create a game for free.
 
 # FAQ
 
