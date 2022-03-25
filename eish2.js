@@ -262,7 +262,7 @@ function JuascriptEval(code) {
     let codeLines = code.split("\n");
     codeLines.forEach(function (line) {
         try {
-            let out = Function('return ' + line)()
+            let out = Function(String(line))()
             return out;
         } catch (e) {
             console.error(`WARNING: Error in line ${line} (does not exist?):
