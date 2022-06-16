@@ -261,8 +261,12 @@ async function respawnLoopBegin() {
 function createScene(engine) {
     return new BABYLON.Scene(engine);
 }
+function createDefaultEngine() {
+return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+}
 
-var engine = new BABYLON.Engine(canvas, true);
+
+var engine = createDefaultEngine();
 engine.init()
 var scene = createScene(engine);
 engine.runRenderLoop(function () {
