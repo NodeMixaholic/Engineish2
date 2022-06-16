@@ -60,14 +60,7 @@ class Instance {
             camera.attachControl(canvas, true);
             return camera;
         } else if (this.type == "workspace") {
-            const engine = new BABYLON.Engine(canvas, true);;
-            scene = createScene(); //Call the createScene function
-
-            // Register a render loop to repeatedly render the scene
-            engine.runRenderLoop(function () {
-                scene.render();
-            });
-            return {"scene": scene, engine: engine};
+           print("Type workspace is deprecated.");
         } else if (this.type == "player") {
             let charObject = new Character(this.name);
             let player = charObject.getPlayer();
@@ -218,7 +211,6 @@ class Instance {
     }
 }
 
-var workspace = new Instance("workspace", "workspace");
 let light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(Math.max(),Math.max(),Math.max()), scene);
 let p = new Instance("player", "playerArray", workspace.scene, 1, 1, 1, 0, 0, 0);
 
@@ -271,7 +263,11 @@ async function respawnLoopBegin() {
 
 function JuascriptEval(code) {
      if (firstRunhdfsuhdshfd9h239th498h4th89t238h9) {
+        var engine = new BABYLON.Engine(canvas, true);;
         var scene = new BABYLON.Scene(engine);
+        engine.runRenderLoop(function () {
+                scene.render();
+            });
         firstRunhdfsuhdshfd9h239th498h4th89t238h9 = false;
      }
     let codeLines = code.split("\n");
