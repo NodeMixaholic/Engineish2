@@ -1,12 +1,9 @@
-function awaitNoAsync(object) {
-let checkObj = setInterval(function(checkObj) {
-   if (object) {
-      console.log(`${object} Exists!`);
-      clearInterval(checkObj);
+var checkExist = setInterval(function() {
+   if (document.getElementById("renderCanvas").length) {
+      console.log("Exists!");
+      clearInterval(checkExist);
    }
 }, 100);
-}
-awaitNoAsync(document.getElementById("renderCanvas"))
 let canvas = document.getElementById("renderCanvas");
 
 
@@ -266,7 +263,7 @@ function createScene(engine) {
 }
 
 var engine = new BABYLON.Engine(canvas, true);
-awaitNoAsync(engine.initAsync());
+engine.init()
 var scene = createScene(engine);
 engine.runRenderLoop(function () {
 	scene.render();
