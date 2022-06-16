@@ -60,8 +60,13 @@ class Instance {
             camera.attachControl(canvas, true);
             return camera;
         } else if (this.type == "workspace") {
-            let engine = new BABYLON.Engine(canvas, true, {preserveDrawingBuffer: true, stencil: true});
-            scene = new BABYLON.Scene(engine);
+            const engine = new BABYLON.Engine(canvas, true);;
+            scene = createScene(); //Call the createScene function
+
+            // Register a render loop to repeatedly render the scene
+            engine.runRenderLoop(function () {
+                scene.render();
+            });
             return {"scene": scene, engine: engine};
         } else if (this.type == "player") {
             let charObject = new Character(this.name);
