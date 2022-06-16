@@ -1,11 +1,13 @@
-let scene;
 var firstRunhdfsuhdshfd9h239th498h4th89t238h9 = true;
-var checkExist = setInterval(function() {
-   if (document.getElementById("renderCanvas").length) {
-      console.log("RenderCanvas Exists!");
-      clearInterval(checkExist);
+function awaitNoAsync(object) {
+let checkObj = setInterval(function(checkObj) {
+   if (object) {
+      console.log(`${object} Exists!`);
+      clearInterval(checkObj);
    }
 }, 100);
+}
+awaitNoAsync(document.getElementById("renderCanvas"))
 let canvas = document.getElementById("renderCanvas");
 
 
@@ -260,19 +262,19 @@ async function respawnLoopBegin() {
     //JUASCRIPT GLOBALS END
 
 
-function createScene() {
+function createScene(engine) {
     return new BABYLON.Scene(engine);
 }
 
-function JuascriptEval(code) {
-     if (firstRunhdfsuhdshfd9h239th498h4th89t238h9) {
-        var engine = new BABYLON.Engine(canvas, true);
-        var scene = createScene();
+var engine = new BABYLON.Engine(canvas, true);
+        awaitNoAsync(engine.initAsync());
+        var scene = createScene(engine);
         engine.runRenderLoop(function () {
                 scene.render();
             });
-        firstRunhdfsuhdshfd9h239th498h4th89t238h9 = false;
-     }
+
+
+function JuascriptEval(code) {
     let codeLines = code.split("\n");
     codeLines.forEach(function (line) {
         try {
@@ -284,7 +286,5 @@ function JuascriptEval(code) {
             return 1;
         }
     });
-
-    
 
 }
