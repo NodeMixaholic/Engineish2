@@ -1,4 +1,11 @@
 let scene;
+
+var checkExist = setInterval(function() {
+   if (document.getElementById("renderCanvas").length) {
+      console.log("RenderCanvas Exists!");
+      clearInterval(checkExist);
+   }
+}, 100)
 let canvas = document.getElementById("renderCanvas");
 
 
