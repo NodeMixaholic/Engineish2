@@ -266,11 +266,11 @@ function createScene(engine) {
 }
 
 var engine = new BABYLON.Engine(canvas, true);
-        awaitNoAsync(engine.initAsync());
-        var scene = createScene(engine);
-        engine.runRenderLoop(function () {
-                scene.render();
-            });
+awaitNoAsync(engine.initAsync());
+var scene = createScene(engine);
+engine.runRenderLoop(function () {
+	scene.render();
+});
 
 
 function JuascriptEval(code) {
