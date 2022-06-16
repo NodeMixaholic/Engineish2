@@ -209,9 +209,6 @@ class Instance {
     }
 }
 
-let light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(Math.max(),Math.max(),Math.max()), scene);
-let p = new Instance("player", "playerArray", workspace.scene, 1, 1, 1, 0, 0, 0);
-
 //JUASCRIPT GLOBALS BEGIN
 
 async function respawnLoopBegin() {
@@ -266,13 +263,16 @@ return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: 
 }
 
 
-var engine = createDefaultEngine();
-engine.init()
-var scene = createScene(engine);
-engine.runRenderLoop(function () {
-	scene.render();
-});
-
+async makeWorkspace() {
+	var engine = createDefaultEngine();
+	engine.init()
+	var scene = createScene(engine);
+	engine.runRenderLoop(function () {
+		scene.render();
+	});
+	let light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(Math.max(),Math.max(),Math.max()), scene);
+	let p = new Instance("player", "playerArray", workspace.scene, 1, 1, 1, 0, 0, 0);
+}
 
 function JuascriptEval(code) {
     let codeLines = code.split("\n");
