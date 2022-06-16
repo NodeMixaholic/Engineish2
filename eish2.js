@@ -1,4 +1,3 @@
-var firstRunhdfsuhdshfd9h239th498h4th89t238h9 = true;
 function awaitNoAsync(object) {
 let checkObj = setInterval(function(checkObj) {
    if (object) {
