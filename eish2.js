@@ -1,11 +1,25 @@
-var checkExist = setInterval(function() {
-   if (document.getElementById("renderCanvas").length) {
-      console.log("Exists!");
-      clearInterval(checkExist);
-   }
-}, 100);
-let canvas = document.getElementById("renderCanvas");
+var engine;
+function waitForCavnas(){
+    if(typeof document.getElementById("renderCanvas") !== "undefined"){
+        console.log(`$Canvas Exists!`);
+        return document.getElementById("renderCanvas")
+    }
+    else{
+        setTimeout(waitForCavnas, 250);
+    }
+}
 
+function waitForScene(){
+    if(typeof scene !== "undefined"){
+        console.log(`${scene} Exists!`);
+        return scene
+    }
+    else{
+        setTimeout(waitForScene, 250);
+    }
+}
+waitForCavnas()
+let canvas = document.getElementById("renderCanvas");
 
 var _G = {};
 class Player {
@@ -17,6 +31,7 @@ class Player {
         this.health = health || 100;
     }
 }
+
 
 class Character { 
     constructor (name) {
@@ -39,7 +54,7 @@ class Character {
 }
 
 class Instance {
-    constructor(name, type, parent, value, width, height, depth, x, y, z, customProperty1, customProperty2) {
+constructor(name, type, parent, value, width, height, depth, x, y, z, customProperty1, customProperty2,scene) {
         this.name = name;
         this.type = type;
         this.width = width || 1;
@@ -47,6 +62,7 @@ class Instance {
         this.depth = depth || 1;
         this.parent = parent || scene;
         this.value = value || "";
+        this.scene = waitForScene()
         if (this.type == "freecamera") {
             let camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
             camera.setTarget(BABYLON.Vector3.Zero());
@@ -68,11 +84,18 @@ class Instance {
             let c = new Instance(this.name, "character", scene, 1, 1, 1, spawnx, spawny, spawnz, charObject);
             return [player, charObject, c];
         } else if (this.type == "block" || this.type == "part") {
+            var sceneExists = setInterval(function() {
+            if (typeof scene !== undefined) {
+                console.log("Scene Exists!");
+                clearInterval(sceneExists);
+            }
+            }, 100);
             let block = BABYLON.MeshBuilder.CreateBox(this.name || "box", {width: this.width, height: this.height, depth: this.depth}, parent).position = new BABYLON.Vector3(x, y, z);
             block.checkCollisions = true;
             block.freezeWorldMatrix();
             return block;
         } else if (this.type == "character") {
+            ;
             //basic third person character
             //create cube character
             let player = customProperty1.getPlayer();
@@ -88,7 +111,7 @@ class Instance {
             playerMesh.material.wireframe = false;
             playerMesh.checkCollisions = true;
             playerMesh.isVisible = true;
-            let camera = new BABYLON.FollowCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
+let camera = new BABYLON.FollowCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
             camera.setTarget(playerMesh.position);
             camera.attachControl(canvas, true);
             //move with w to forward s to back a to strafe d to right
@@ -130,19 +153,19 @@ class Instance {
             sound.play();
             return sound;
         } else if (this.type == "soundManual") {
-            //NOTE: THIS IS THE ONLY SOUND METHOD COMPATABLE WITH CHROME
             let sound = new Audio(this.value);
             return sound;
         } else if (this.type == "loopedSoundManual") {
-            //NOTE: THIS IS THE ONLY LOOPED SOUND METHOD COMPATABLE WITH CHROME
             let sound = new Audio(this.value);
             sound.loop = true;
             return sound;
         } else if (this.type == "light") {
+		
             let light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
             light.intensity = 0.7;
             return light;
         } else if (this.type == "skybox") {
+            
             let skybox = BABYLON.Mesh.CreateBox("skyBox", 1000.0, scene);
             let skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
             skyboxMaterial.backFaceCulling = false;
@@ -153,6 +176,7 @@ class Instance {
             skybox.material = skyboxMaterial;
             return skybox;
         } else if (this.type == "particle") {
+		
             let particleSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
             particleSystem.particleTexture = new BABYLON.Texture(this.value, scene);
             particleSystem.minAngularSpeed = -0.5;
@@ -177,6 +201,7 @@ class Instance {
             particleSystem.start();
             return particleSystem;
         } else if (this.type == "baseplate") {
+		
             //create ground plane
             let ground = BABYLON.Mesh.CreateGround("ground", width, height, depth, scene);
             let groundMaterial = new BABYLON.StandardMaterial("groundMat", scene);
@@ -192,7 +217,8 @@ class Instance {
             ground.isVisible = true;
             ground.freezeWorldMatrix();
             return ground;
-        } 
+        }    
+    
 
     }
 
@@ -255,30 +281,12 @@ async function respawnLoopBegin() {
     //JUASCRIPT GLOBALS END
 
 
-function createScene(engine) {
-    return new BABYLON.Scene(engine);
-}
-function createDefaultEngine() {
-return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
-}
-
-
-async function makeWorkspace() {
-	var engine = createDefaultEngine();
-	engine.init()
-	var scene = createScene(engine);
-	engine.runRenderLoop(function () {
-		scene.render();
-	});
-	let light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(Math.max(),Math.max(),Math.max()), scene);
-	let p = new Instance("player", "playerArray", workspace.scene, 1, 1, 1, 0, 0, 0);
-}
-
-function JuascriptEval(code) {
+async function JuascriptEval(code) {
+    waitForScene()
     let codeLines = code.split("\n");
     codeLines.forEach(function (line) {
         try {
-            let out = Function(String(line))();
+            let out = Function(String(codeLines))();
             return out;
         } catch (e) {
             console.error(`WARNING: Error in line ${line} (does not exist?):
@@ -288,3 +296,22 @@ function JuascriptEval(code) {
     });
 
 }
+
+function createScene(engine) {
+    return new BABYLON.Scene(engine);
+}
+function createDefaultEngine() {
+return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+}
+
+
+async function makeWorkspace() {
+	engine = createDefaultEngine();
+	var scene = await createScene(engine);
+	engine.runRenderLoop(function () {
+		scene.render();
+	});
+	let light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(Math.max(),Math.max(),Math.max()), scene);
+	let p = new Instance("player", "playerArray", workspace.scene, 1, 1, 1, 0, 0, 0);
+}
+makeWorkspace()
