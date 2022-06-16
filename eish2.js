@@ -1,5 +1,5 @@
 let scene;
-
+var firstRunhdfsuhdshfd9h239th498h4th89t238h9 = true;
 var checkExist = setInterval(function() {
    if (document.getElementById("renderCanvas").length) {
       console.log("RenderCanvas Exists!");
@@ -270,7 +270,10 @@ async function respawnLoopBegin() {
 
 
 function JuascriptEval(code) {
-    
+     if (firstRunhdfsuhdshfd9h239th498h4th89t238h9) {
+        var scene = new BABYLON.Scene(engine);
+        firstRunhdfsuhdshfd9h239th498h4th89t238h9 = false;
+     }
     let codeLines = code.split("\n");
     codeLines.forEach(function (line) {
         try {
