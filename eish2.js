@@ -263,7 +263,7 @@ return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: 
 }
 
 
-async makeWorkspace() {
+async function makeWorkspace() {
 	var engine = createDefaultEngine();
 	engine.init()
 	var scene = createScene(engine);
