@@ -260,11 +260,14 @@ async function respawnLoopBegin() {
     //JUASCRIPT GLOBALS END
 
 
+function createScene() {
+    return new BABYLON.Scene(engine);
+}
 
 function JuascriptEval(code) {
      if (firstRunhdfsuhdshfd9h239th498h4th89t238h9) {
         var engine = new BABYLON.Engine(canvas, true);
-        var scene = new BABYLON.Scene(engine);
+        var scene = createScene();
         engine.runRenderLoop(function () {
                 scene.render();
             });
@@ -281,5 +284,7 @@ function JuascriptEval(code) {
             return 1;
         }
     });
+
+    
 
 }
