@@ -5,7 +5,7 @@ var checkExist = setInterval(function() {
       console.log("RenderCanvas Exists!");
       clearInterval(checkExist);
    }
-}, 100)
+}, 100);
 let canvas = document.getElementById("renderCanvas");
 
 
@@ -56,7 +56,7 @@ class Instance {
             return camera;
         } else if (this.type == "followcamera") {
             let camera = new BABYLON.FollowCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
-            camera.setTarget(parent)
+            camera.setTarget(parent);
             camera.attachControl(canvas, true);
             return camera;
         } else if (this.type == "workspace") {
@@ -64,9 +64,9 @@ class Instance {
         } else if (this.type == "player") {
             let charObject = new Character(this.name);
             let player = charObject.getPlayer();
-            spawnx = x || 0
-            spawny = y || 4
-            spawnz = z || 0
+            spawnx = x || 0;
+            spawny = y || 4;
+            spawnz = z || 0;
             let c = new Instance(this.name, "character", scene, 1, 1, 1, spawnx, spawny, spawnz, charObject);
             return [player, charObject, c];
         } else if (this.type == "block" || this.type == "part") {
@@ -263,7 +263,7 @@ async function respawnLoopBegin() {
 
 function JuascriptEval(code) {
      if (firstRunhdfsuhdshfd9h239th498h4th89t238h9) {
-        var engine = new BABYLON.Engine(canvas, true);;
+        var engine = new BABYLON.Engine(canvas, true);
         var scene = new BABYLON.Scene(engine);
         engine.runRenderLoop(function () {
                 scene.render();
@@ -273,7 +273,7 @@ function JuascriptEval(code) {
     let codeLines = code.split("\n");
     codeLines.forEach(function (line) {
         try {
-            let out = Function(String(line))()
+            let out = Function(String(line))();
             return out;
         } catch (e) {
             console.error(`WARNING: Error in line ${line} (does not exist?):
